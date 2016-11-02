@@ -29,7 +29,7 @@
 #>
 Function CopySubDirContents($src1, $targ1, $pattern)
 {    
-    Get-ChildItem -Path $src1 | where {$_.PSISContainer} |% { 
+    Get-ChildItem -Path $src1 -Directory |% { 
         $tempSourceFiles = (join-path -path $_.Fullname -childpath $pattern) # This will result in something like D:\working\suba\*.pdf
         $subdir = $_.BaseName        
         $targetsubdir = Join-Path -Path $targ1 -ChildPath $subdir
