@@ -29,6 +29,8 @@
 #>
 Function CopySubDirContents($src1, $targ1, $pattern)
 {    
+    # older pows runtimes don't support the -Directory argument so in these cases
+    # use | where {$_.PSISContainer} |%
     Get-ChildItem -Path $src1 -Directory |% { 
         $tempSourceFiles = (join-path -path $_.Fullname -childpath $pattern) # This will result in something like D:\working\suba\*.pdf
         $subdir = $_.BaseName        
