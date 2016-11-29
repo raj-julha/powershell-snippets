@@ -10,3 +10,6 @@ get-childitem -Path toplevelfolder -Filter *.TXT -Recurse | WHERE { select-strin
 # Display CSV file contents in a trig-view
 Import-Csv .\filename.csv | Out-GridView 
 
+# Change extension of many files
+
+get-childitem d:\folderlocation -Filter "*.ext" | Rename-Item -NewName { [io.path]::ChangeExtension($_.FullName, "newext")}
