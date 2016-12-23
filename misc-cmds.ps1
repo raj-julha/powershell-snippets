@@ -7,6 +7,8 @@ This file will hold powershell commands as I find them before they go into their
 
 get-childitem -Path toplevelfolder -Filter *.TXT -Recurse | WHERE { select-string "text to search" $_ } | select fullname 
 
+Get-ChildItem -Path \\server1\share1\folder1 -Recurse -Filter "ABC-2016????.csv" | Select-String -Pattern "(regex1*) | (regex2*)" | select Line | Format-Table -Wrap -AutoSize | Out-String -Width 2000| Out-File -FilePath D:\localfolder\myresult.csv
+
 # Display CSV file contents in a trig-view
 Import-Csv .\filename.csv | Out-GridView 
 
