@@ -30,3 +30,5 @@ $resp = Invoke-WebRequest -Uri http://example.com/foobar -Method POST -Body $pos
 
 # Identify AD membership
 Get-ADuser userid -Properties MemberOf | select MemberOf |% {$_.MemberOf}
+
+# http://woshub.com/copying-large-files-using-bits-and-powershell/
