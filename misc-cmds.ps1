@@ -27,3 +27,6 @@ Invoke-WebRequest -Uri http://sitename/subfolder/filename.zip -OutFile D:\localf
 
 $postParams = @{username='me';moredata='qwerty'}
 $resp = Invoke-WebRequest -Uri http://example.com/foobar -Method POST -Body $postParams
+
+# Identify AD membership
+Get-ADuser userid -Properties MemberOf | select MemberOf |% {$_.MemberOf}
