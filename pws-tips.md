@@ -1,22 +1,22 @@
 From Windows Best Practices and Patterns DOn Jones youtube video
 
-TOOLS
-   Create Input for other tools
-      Get-
-      Import-
-      COnvertFrom-
+# TOOLS
+   Create Input for other tools  
+      Get-  
+      Import-  
+      COnvertFrom-  
       
-   Process something and may produce output
-      Get-
-      Set-
-      New-
-      Remove-
+   Process something and may produce output  
+      Get-  
+      Set-  
+      New-  
+      Remove-  
       
-   Accept output and make it pretty
-      Export-
-      ConvertTo-
+   Accept output and make it pretty  
+      Export-  
+      ConvertTo-  
       Format-
-      Out- (maybe)
+      Out- (maybe)  
       
 CONTROLLERS
  - Use one or more tools to automate a business process
