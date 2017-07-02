@@ -1,6 +1,6 @@
 From Windows Best Practices and Patterns DOn Jones youtube video
 
-# TOOLS
+## TOOLS
    Create Input for other tools  
       Get-  
       Import-  
@@ -18,7 +18,7 @@ From Windows Best Practices and Patterns DOn Jones youtube video
       Format-
       Out- (maybe)  
       
-CONTROLLERS
+## CONTROLLERS
  - Use one or more tools to automate a business process
  - Are single purpose
  - Encapsulate input, processing and output
