@@ -6,6 +6,14 @@ http://ss64.com/ps/convertfrom-csv.html
 http://stackoverflow.com/questions/3473357/quick-way-to-read-a-tab-delimited-file-and-sort-by-date-column-using-powershell
 #>
 
+# Display CSV file contents in a grid-view. Considers the first row as header
+Import-Csv .\filename.csv | Out-GridView 
+
+# The file filewithoutheaderrow.csv has data as from first row so the system  infers the
+# header. If the file has more than 3 fields it will only show the first 3 columns
+# with header ColA, ColB and ColC. As we add more header fieldnames further columns can be displayed
+Import-Csv -Path .\filewithoutheaderrow.csv  -Header ColA,ColB,ColC | out-gridview
+
 
 Get-Content -Path C:\top\sub1\TabDelimfile.txt | ConvertFrom-Csv -Delimiter "`t" | Out-GridView
 
