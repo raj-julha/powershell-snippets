@@ -9,8 +9,13 @@ get-childitem -Path toplevelfolder -Filter *.TXT -Recurse | WHERE { select-strin
 
 Get-ChildItem -Path \\server1\share1\folder1 -Recurse -Filter "ABC-2016????.csv" | Select-String -Pattern "(regex1*) | (regex2*)" | select Line | Format-Table -Wrap -AutoSize | Out-String -Width 2000| Out-File -FilePath D:\localfolder\myresult.csv
 
-# Display CSV file contents in a trig-view
+# Display CSV file contents in a grid-view. Considers the first row as header
 Import-Csv .\filename.csv | Out-GridView 
+
+# The file filewithoutheaderrow.csv has data as from first row so the system  infers the
+# header. If the file has more than 3 fields it will only show the first 3 columns
+# with header ColA, ColB and ColC. As we add more header fieldnames further columns can be displayed
+Import-Csv -Path .\filewithoutheaderrow.csv  -Header ColA,ColB,ColC | out-gridview
 
 # Change extension of many files
 
