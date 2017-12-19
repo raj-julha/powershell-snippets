@@ -1,4 +1,4 @@
-<#
+ <#
 2016-06-07 (Raj)
 Powershell commands to read delimited files
 http://ss64.com/ps/convertfrom-csv.html
@@ -30,4 +30,9 @@ such as conversion to DateTime for sorting
 ft below is short form of Format-Table
 
 Import-CSV -delimiter "`t" Output.tab | Where-Object {$_.'First Name' -like '*And*'} | add-member scriptproperty -name 'HireDateTyped' -value { [DateTime]::Parse($this.'Hire Date') } -passthru | Sort-Object 'HireDateTyped' | ft 'Hire Date', 'First Name'
- 
+
+#
+get-childitem -Path .\ -Filter .\data\file0?.txt |%{write-host "headerline" }{ import-csv -path $_.FullName -Delimiter '|'} 
+# The command below loops throughg all files like file01.txt, file02.txt and creates a merged output file mfile02.txt
+# It automatically takes care of header line in each file
+get-childitem -Path d:\topfolder -recurse -file -Filter file0?.txt |% {write-host "headerline" $_.FullName } { import-csv -path $_.FullName -Delimiter '|'} | Export-Csv -Path .\data\mfile02.txt -Append -NoTypeInformation -Delimiter '|' 
