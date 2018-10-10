@@ -3,6 +3,14 @@
 This file will hold powershell commands as I find them before they go into their specific modules
 #>
 
+# List files from a folder containing huge number of files
+# Get-ChildItem builds files list in memory before proceeding so use the commadn below to get teh first file immediately for processing
+# See http://powershell-guru.com/fastest-powershell-2-count-all-files-in-large-network-share/
+
+[System.IO.Directory]::EnumerateFiles("\\servername\share\", "*.*")
+
+
+
 # Search text in a list of files
 
 get-childitem -Path toplevelfolder -Filter *.TXT -Recurse | WHERE { select-string "text to search" $_ } | select fullname 
