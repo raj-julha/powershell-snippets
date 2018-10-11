@@ -9,7 +9,8 @@ This file will hold powershell commands as I find them before they go into their
 
 [System.IO.Directory]::EnumerateFiles("\\servername\share\", "*.*")
 
-
+$Di = New-Object -TypeName System.IO.DirectoryInfo("d:\mysource")
+$Di.EnumerateFileSystemInfos("*.txt", [System.IO.SearchOption]::AllDirectories) | Where-Object {$_.LastWriteTime -lt (get-date -Year 2018 -Month 1 -Day 1)}
 
 # Search text in a list of files
 
