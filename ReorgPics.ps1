@@ -13,7 +13,6 @@
  Date Created: 2018-11-14
  Author: Raj
 
- TODO: Use validate script in arg to validate root, target folders etc.
  TODO: Prompt user before proceeding
 
 #>
@@ -21,18 +20,23 @@
 [CmdletBinding()]
 Param(
     [ValidateScript({
-        If(-not (Test-Path $_ -PathType Container)){ 
-            Write-Host "Root folder does not exist"
-            $false
-        } Else {
+        If(Test-Path $_ -PathType Container){             
             $true
+        } Else {
+            Throw "Source folder $_ does not  exist or is not accessible"
         }
     })]
     [string]$RootFolder = "C:\junk\camera",
-    [ValidateScript({ Test-Path $_ -PathType Container })]
+    [ValidateScript({
+        If(Test-Path $_ -PathType Container){             
+            $true
+        } Else {
+            Throw "Target folder $_ does not  exist or is not accessible"
+        }
+    })]
     [string]$TargetFolder = "C:\junk\camera\reorg",
     [string]$FilterMask = "^(?<YearPart>\d{4})(?<MonthPart>\d{2})(?<DayPart>\d{2})_(?<TimePart>\d{6}).*\.jpg$",
-    [switch]$Copy = $false
+    [switch]$Move = $False
 )
 
 
@@ -51,5 +55,9 @@ $Di.EnumerateFileSystemInfos() | Where-Object {$_.Name -match $FilterMask } | Fo
     }
 
     Write-Verbose "Processing $($_.Name), moving to $TargetSubFolder"
-    Move-Item -Path $_.FullName -Destination $TargetSubFolder -Force
+    If($Move){
+       Move-Item -Path $_.FullName -Destination $TargetSubFolder -Force
+    } Else {
+       Copy-Item -Path $_.FullName -Destination $TargetSubFolder -Force
+    }
 }
