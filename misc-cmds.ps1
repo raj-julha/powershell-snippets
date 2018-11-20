@@ -38,3 +38,22 @@ $resp = Invoke-WebRequest -Uri http://example.com/foobar -Method POST -Body $pos
 Get-ADuser userid -Properties MemberOf | select MemberOf |% {$_.MemberOf}
 
 # http://woshub.com/copying-large-files-using-bits-and-powershell/
+
+
+# Export CSV file from a .NET DataTable object 
+# Ensure dates are exported in yyyy-MM-dd HH:mm:ss format. Without the two statements below
+# dates are export as per server format, i.e. dd/MM/yyyy HH:mm:ss or MM/dd/yyyy
+(Get-Culture).DateTimeFormat.ShortDatePattern = "yyyy-MM-dd"
+(Get-Culture).DateTimeFormat.ShortTimePattern = "HH:mm:ss.fff"
+
+# We want a separate file per a unique field, e.g. per region code
+# Consider how ew could use LINQ
+$UniqueFields01 = $data | select-Object Field01 -Unique
+        
+$UniqueFields01 | ForEach-Object {
+    $curField01 = $_.Field01
+                           
+    # The first line will contain "#TYPE System.Data.DataRow" without the -NoTypeInformation                
+    $outfile = Join-Path -Path "D:\somelocation" -ChildPath ("{0}-Out_{1:yyyyMMdd}.csv" -f $curField01, (get-date))
+    $data | where {$_.Field01 -eq $curField01 } | Export-Csv -Path $outfile -NoTypeInformation        
+ }            
