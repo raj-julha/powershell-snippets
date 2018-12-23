@@ -56,4 +56,11 @@ $UniqueFields01 | ForEach-Object {
     # The first line will contain "#TYPE System.Data.DataRow" without the -NoTypeInformation                
     $outfile = Join-Path -Path "D:\somelocation" -ChildPath ("{0}-Out_{1:yyyyMMdd}.csv" -f $curField01, (get-date))
     $data | where {$_.Field01 -eq $curField01 } | Export-Csv -Path $outfile -NoTypeInformation        
- }            
+ }    
+ 
+ # Output into clipboard
+ 
+ Get-Process | clip
+ 
+ # Open an editor and paste
+ 
