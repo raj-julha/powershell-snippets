@@ -67,3 +67,7 @@ $UniqueFields01 | ForEach-Object {
  # Create an event source
  new-eventlog -source "Custom Source" -LogName "Application"
  
+# https://stackoverflow.com/questions/32511325/invoke-sqlcmd-with-either-windows-authentication-or-sql-authentication
+# requires sql client on workstation
+$auth = @{} # for windows authentication
+Invoke-Sqlcmd -ServerInstance DBSERVERNAME -Database DBNAME  -Query "SELECT top 10 * from Information_Schema.TABLES" @auth
