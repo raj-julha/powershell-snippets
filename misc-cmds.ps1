@@ -64,3 +64,6 @@ $UniqueFields01 | ForEach-Object {
  
  # Open an editor and paste
  
+ # Create an event source
+ new-eventlog -source "Custom Source" -LogName "Application"
+ 
