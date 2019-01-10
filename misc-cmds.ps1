@@ -42,7 +42,9 @@ Get-ADuser userid -Properties MemberOf | select MemberOf |% {$_.MemberOf}
 
 # Export CSV file from a .NET DataTable object 
 # Ensure dates are exported in yyyy-MM-dd HH:mm:ss format. Without the two statements below
-# dates are export as per server format, i.e. dd/MM/yyyy HH:mm:ss or MM/dd/yyyy
+# dates are exported as per server format, i.e. dd/MM/yyyy HH:mm:ss or MM/dd/yyyy
+# NOTE: 2019-01-10 (Inside the powershell console of VS Code the two statements below fail
+# with the error Property is readonly but works in normal powershell
 (Get-Culture).DateTimeFormat.ShortDatePattern = "yyyy-MM-dd"
 (Get-Culture).DateTimeFormat.ShortTimePattern = "HH:mm:ss.fff"
 
@@ -71,3 +73,15 @@ $UniqueFields01 | ForEach-Object {
 # requires sql client on workstation
 $auth = @{} # for windows authentication
 Invoke-Sqlcmd -ServerInstance DBSERVERNAME -Database DBNAME  -Query "SELECT top 10 * from Information_Schema.TABLES" @auth
+
+# Pass Dates to a script that expects dates
+
+.\mypws.ps1 -StartDateTime ([DateTime]::new(2018,10,1,8,0,0)) -EndDateTime ([DateTime]::new(2019,1,9))
+# Where  mypws.ps1 would have an argument definition like below
+[CmdletBinding()]
+Param(
+    [datetime]$StartDateTime = (get-date).AddMinutes(-120),
+    [datetime]$EndDateTime = (get-date),
+    [switch]$overwriteExisting = [switch]::Present,    
+    [switch]$retainWorkfolder = $false,    
+)
