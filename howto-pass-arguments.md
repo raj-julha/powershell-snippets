@@ -27,6 +27,7 @@ Param(
 Assuming script name is myscript.ps1
 
 ## Date Argument
+Works with Powershell ver 5 onwards
 ```powershell
 # Here we are passing 11 Jan 2019 14:30:25 to the script
 myscript.ps1 -StartDate ([DateTime]::new(2019, 1, 11, 14, 30, 25))
