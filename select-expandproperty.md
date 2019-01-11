@@ -10,7 +10,8 @@ Get-Service | Select -ExpandProperty DisplayName | gm #  TypeName: System.String
 ```
 
 ###### Use calculated properties when there's a need to combine or transform properties
-# https://technet.microsoft.com/en-us/library/ff730948.aspx
+[https://technet.microsoft.com/en-us/library/ff730948.aspx]([https://technet.microsoft.com/en-us/library/ff730948.aspx])
+
 ```powershell
 Get-Service | Select @{n="DisplayName"; e={$_.MachineName + "\"+$_.ServiceName}}
 
