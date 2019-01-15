@@ -1,4 +1,4 @@
-# Schedule Powershell 
+# Schedule Powershell Scripts
 
 The windows scheduler enables the execution of programs at pre-defined intervals and these can be executables, BAT files or powershell scripts. 
 Special attention is required when the powershell script expects command line arguments and the steps below describe the values for each field in WIndows schedule action screen.
