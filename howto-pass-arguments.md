@@ -17,7 +17,7 @@ Param(
     [string]$Target = "D:\mytopfolder\subfolder1",    
     [string]$Loglocation = "D:\myLoglocation",
     [string]$Workfolder =  (join-path -path ([environment]::getfolderpath("CommonApplicationData")) -childpath "scriptname1"),
-    [switch]$OverwriteExisting = [switch]::Present,
+    [switch]$OverwriteExisting = [switch]::Present, # same as = $True
     [switch]$RetainWorkfolder = $false,
     [string[]]$Users = $null,
     [string]$Recipients = ((Get-Content -Path .\recipients.txt) -join ",") # Here the argument is expecting a coma separated list of recipients; recipients.txt contains one line per recipient
