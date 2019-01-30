@@ -30,6 +30,8 @@ such as conversion to DateTime for sorting
 ft below is short form of Format-Table
 
 Import-CSV -delimiter "`t" Output.tab | Where-Object {$_.'First Name' -like '*And*'} | add-member scriptproperty -name 'HireDateTyped' -value { [DateTime]::Parse($this.'Hire Date') } -passthru | Sort-Object 'HireDateTyped' | ft 'Hire Date', 'First Name'
+# The line below must be tested (2019-01-31)
+Import-CSV -delimiter "`t" Output.tab | Where-Object {$_.'First Name' -like '*And*'} | [PSCustomObject]@{ HireDateTyped = [DateTime]::Parse($this.'Hire Date') -passthru | Sort-Object 'HireDateTyped' | ft 'Hire Date', 'First Name'
 
 #
 get-childitem -Path .\ -Filter .\data\file0?.txt |%{write-host "headerline" }{ import-csv -path $_.FullName -Delimiter '|'} 
