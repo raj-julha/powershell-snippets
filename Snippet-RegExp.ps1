@@ -1,6 +1,6 @@
-﻿<#
+<#
 .SYNOPSIS
- Append a new extension or change extension of files that match a specific regular expression
+ Commonly used regular expressions
 
 .DESCRIPTION
  Append a new extension or change extension of files that match a specific regular expression
@@ -45,3 +45,11 @@ $MatchEval = {
 [System.Text.RegularExpressions.Regex]::Replace($InputStr, $Pattern, {
         $args[0].Value.Replace("_", "").ToUpper()
     })
+
+# Get server name from url
+$Url = "http://localhost:1234"
+[string]$ServerRegExp = "^http://(?<servername>.*):(?<port>[0-9]*)"
+$Url -match $ServerRegExp  # returns True if match exists
+$Matches
+$Matches["servername"]
+$Matches["servernamex"] # returns blank if it doesn't exist
