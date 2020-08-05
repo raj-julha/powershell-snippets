@@ -53,3 +53,8 @@ $Url -match $ServerRegExp  # returns True if match exists
 $Matches
 $Matches["servername"]
 $Matches["servernamex"] # returns blank if it doesn't exist
+
+
+# Search for all spaces except for CRLF
+# Can be used to replace space between columns with TAB
+\s+[^\S\r\n]
