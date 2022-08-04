@@ -4,6 +4,10 @@
 
 .DESCRIPTION
 #>
+
+# Passing local variables to remote session 
+# https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_Remote_Variables?view=powershell-5.1#using-local-variables
+
 $Servers = @("server1", "server2")
 
 $Servers = Get-Content -Path .\serverlist.txt
