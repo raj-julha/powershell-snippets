@@ -22,6 +22,17 @@ Param(
     [string[]]$Users = $null,
     [string]$Recipients = ((Get-Content -Path .\recipients.txt) -join ",") # Here the argument is expecting a coma separated list of recipients; recipients.txt contains one line per recipient
 )
+
+# Handling swtich arguments
+
+If(OverwriteExisting.IsPresent) {
+   # Do something
+}
+
+If(!RetainWorkfolder.IsPresent) {
+   # Remove workfolder
+}
+
 ```
 
 Assuming script name is myscript.ps1
@@ -44,6 +55,11 @@ myscript.ps1 -Users (@("user1", "user2", "user3"))
 ```powershell
 # 
 myscript.ps1 -Recipients "user1@gmail.com, user2@gmailcom, user3@gmail,com"
+```
+
+## Setting [switch] argument as false
+```
+ myscript.ps1 -OverwriteExisting:$False
 ```
 
 
