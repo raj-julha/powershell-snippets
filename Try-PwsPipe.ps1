@@ -4,7 +4,12 @@
 
 .DESCRIPTION
  Demonstrate how to pass multiple items through pipe
+ 
+ NOTE: A script that consumes from a pipeline must have the BEGIN/PROCESS/END blocks or else
+       it is considered as having just the END block and will therefore be executed after the 
+       last item
 
+https://mohitgoyal.co/2019/03/11/implement-pipeline-support-for-advanced-functions-in-powershell/
 #>
 
 
