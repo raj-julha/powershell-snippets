@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
- Demonstrate piping of some of the command line arguments 
+ Demonstrate piping of some of the command line arguments. See notes about helper functions
 
 .DESCRIPTION
  Demonstrate how to pass multiple items through pipe
@@ -27,11 +27,22 @@ param (
 
 begin {"Test Begin"
     $Ctr = 0
+    <#
+    .SYNOPSIS
+     Any function to support this script must be define din the BEGIN block
+     as scripts that process pipelines should always have the 
+     BEGIN/PROCESS/END blocks and no code outside
+    #>
+    Function SomeHelper {
+        Param($SomeArg)
+        write-verbose "$($SomeArg) passed to function"
+    }
 }
 
 process {
     Write-Host "InputFile is $InputFile ; CountryCode is $CountryCode ;" + `
     "AccountNo is $AccountNo; and TargetLocation is $TargetLocation"
+    SomeHelper -SomeArg "any value"
     $Ctr++
 }
 end {
